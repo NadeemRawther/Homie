@@ -15,7 +15,6 @@
         android:columnWidth="90dp"
         android:paddingTop="90dp"
         android:gravity="center"
-
         android:numColumns="2"
         android:padding="8dp"
        />

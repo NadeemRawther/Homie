@@ -1,5 +1,10 @@
 package com.labour.homie;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.labour.homie.Adapter.ImageAdapter;
 import com.labour.homie.Entities.ImagAndText;
@@ -23,6 +29,7 @@ import java.util.ArrayList;
 public class UserPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<ImagAndText> birdList=new ArrayList<>();
+    BroadcastReceiver mBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +40,8 @@ public class UserPage extends AppCompatActivity
     for(int imag = 0;imag < mThumbIds.length;imag++) {
     birdList.add(new ImagAndText(Name[imag], mThumbIds[imag]));
     }
-
 ImageAdapter myAdapter=new ImageAdapter(this,R.layout.content_user_page,birdList);
 gridview.setAdapter(myAdapter);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,8 +49,13 @@ gridview.setAdapter(myAdapter);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
+    }
+      public void startfragment(){
+
+
+
+      }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -111,7 +121,5 @@ gridview.setAdapter(myAdapter);
 
     public String[] Name = {
             "AC mechanic","Carpenter","Driver","Electrician","Gardener","Plumber","Servant","Treecutter"
-
-
     };
 }

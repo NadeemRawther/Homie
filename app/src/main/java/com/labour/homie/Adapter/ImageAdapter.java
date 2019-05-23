@@ -1,8 +1,14 @@
 package com.labour.homie.Adapter;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.app.FragmentActivity;
+
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.labour.homie.Entities.ImagAndText;
+import com.labour.homie.LabourList;
+import com.labour.homie.ListOfLabours;
 import com.labour.homie.R;
 
 import java.util.ArrayList;
@@ -34,7 +42,6 @@ public class ImageAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View v = convertView;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.layout_for_gridimage, null);
@@ -45,13 +52,21 @@ public class ImageAdapter extends ArrayAdapter {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // FragmentManager fragmentManager = context.getApplicationContext().getString();
-               // FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                /*FragmentManager fragmentManager =((Activity)context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                LabourList fragment = new LabourList();
+                fragmentTransaction.add(R.id.grid_view_items, new LabourList());
+                fragmentTransaction.commit();*/
+                Intent intent = new Intent(context.getApplicationContext(), ListOfLabours.class);
+                context.startActivity(intent);
+
+
+
 
             }
         });
         return v;
-
     }
 
 

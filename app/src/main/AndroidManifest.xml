@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/h"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ListOfLabours"></activity>
         <activity
             android:name=".UserPage"
             android:label="@string/title_activity_user_page"
@@ -19,9 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
