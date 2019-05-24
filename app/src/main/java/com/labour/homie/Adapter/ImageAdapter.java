@@ -41,7 +41,7 @@ public class ImageAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.layout_for_gridimage, null);
@@ -59,6 +59,7 @@ public class ImageAdapter extends ArrayAdapter {
                 fragmentTransaction.add(R.id.grid_view_items, new LabourList());
                 fragmentTransaction.commit();*/
                 Intent intent = new Intent(context.getApplicationContext(), ListOfLabours.class);
+                intent.putExtra("link",birdList.get(position).getTitle());
                 context.startActivity(intent);
 
 
