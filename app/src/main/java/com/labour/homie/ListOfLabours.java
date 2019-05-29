@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.labour.homie.Adapter.ListAdapter;
+import com.labour.homie.Adapter.LabourAdapter;
 import com.labour.homie.Entities.CardForLabours;
 
 import java.util.ArrayList;
@@ -56,51 +56,36 @@ public class ListOfLabours extends AppCompatActivity {
             case "Treecutter":
                 link2 = "treecutter";
                 break;
-
-
-
-
-
-
         }
-        final RecyclerView labourcycle = findViewById(R.id.recyclerforlabour);
-        labourcycle.setHasFixedSize(true);
         progressDialog = new ProgressDialog(ListOfLabours.this);
         progressDialog.setMessage("please Wait while loading");
         progressDialog.show();
+        final RecyclerView labourcycle = findViewById(R.id.recyclerforlabour);
+        labourcycle.setHasFixedSize(true);
+
         Log.e("Nadeem2",link2);
-        DatabaseReference myRef = database.getReference("labour/"+link2);
+        DatabaseReference myRef = database.getReference("users/labour/"+link2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         labourcycle.setLayoutManager(layoutManager);
-
 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-            Log.e("Nadeem",dataSnapshot1.child("name").getValue().toString());
-            CardForLabours cardForLabours = new CardForLabours(dataSnapshot1.child("name").getValue().toString(),dataSnapshot1.child("phone").getValue().toString(),dataSnapshot1.child("place").getValue().toString(),dataSnapshot1.child("charge").getValue().toString());
-                    arrayList.add(cardForLabours);
 
+            Log.e("Nadeem",dataSnapshot1.child("name").getValue().toString());
+           CardForLabours cardForLabours = new CardForLabours(dataSnapshot1.child("name").getValue().toString(),dataSnapshot1.child("phone").getValue().toString(),dataSnapshot1.child("place").getValue().toString(),dataSnapshot1.child("charge").getValue().toString());
+           arrayList.add(cardForLabours);
 
         }
-        ListAdapter listAdapter = new ListAdapter(ListOfLabours.this,arrayList);
-        labourcycle.setAdapter(listAdapter);
+        LabourAdapter labourAdapter = new LabourAdapter(ListOfLabours.this,arrayList);
+        labourcycle.setAdapter(labourAdapter);
+        Log.e("VASU",arrayList.toString());
         progressDialog.dismiss();
-
     }
-
     @Override
     public void onCancelled(@NonNull DatabaseError databaseError) {
 
     }
 });
-
-
-
-
-
-
-
-
     }
 }

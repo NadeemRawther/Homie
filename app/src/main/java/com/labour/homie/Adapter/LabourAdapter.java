@@ -9,24 +9,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.labour.homie.Entities.CardForLabours;
+import com.labour.homie.LabourProfile;
 import com.labour.homie.R;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-
+public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder> {
 
     TextView titles,detail,requests;
     ImageButton imgphon;
     ArrayList<CardForLabours> list;
     Context context;
 
-    public ListAdapter (Context context,ArrayList<CardForLabours> arrayList){
+    public LabourAdapter(Context context, ArrayList<CardForLabours> arrayList){
         this.list = arrayList;
         this.context = context;
     }
@@ -34,13 +33,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public LabourAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         CardView view = (CardView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_of_labours,viewGroup,false);
-        return new ListAdapter.ViewHolder(view);
+        return new LabourAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListAdapter.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull LabourAdapter.ViewHolder viewHolder, final int i) {
         final int j;
 
         final CardView cardView = viewHolder.cardView;
@@ -56,7 +55,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 String ph = list.get(i).getPhone();
-
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ph));
                 context.startActivity(intent);
             }
@@ -65,6 +63,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+Intent intent = new Intent(context, LabourProfile.class);
+context.startActivity(intent);
 
             }
         });
