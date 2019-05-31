@@ -72,8 +72,8 @@ myRef.addListenerForSingleValueEvent(new ValueEventListener() {
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
 
-            Log.e("Nadeem",dataSnapshot1.child("name").getValue().toString());
-           CardForLabours cardForLabours = new CardForLabours(dataSnapshot1.child("name").getValue().toString(),dataSnapshot1.child("phone").getValue().toString(),dataSnapshot1.child("place").getValue().toString(),dataSnapshot1.child("charge").getValue().toString());
+            Log.e("Nadeem",dataSnapshot1.getKey().toString());
+           CardForLabours cardForLabours = new CardForLabours(dataSnapshot1.child("name").getValue().toString(),dataSnapshot1.child("phone").getValue().toString(),dataSnapshot1.child("place").getValue().toString(),dataSnapshot1.child("charge").getValue().toString(),dataSnapshot1.getKey().toString());
            arrayList.add(cardForLabours);
 
         }

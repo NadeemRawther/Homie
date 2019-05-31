@@ -64,6 +64,8 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
             @Override
             public void onClick(View v) {
 Intent intent = new Intent(context, LabourProfile.class);
+intent.putExtra("userid",list.get(i).getUserid());
+
 context.startActivity(intent);
 
             }
