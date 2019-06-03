@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.labour.homie.Entities.CardForLabours;
 import com.labour.homie.Entities.CardReview;
@@ -17,7 +18,9 @@ import java.util.ArrayList;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
         TextView titles,detail,requests;
         ImageButton imgphon;
-        ArrayList<CardReview> list;
+        ArrayList<CardReview> list = new ArrayList<>();
+        TextView title,review;
+        RatingBar ratingBar;
         Context context;
 public ReviewAdapter(Context context, ArrayList<CardReview> arrayList){
         this.list = arrayList;
@@ -34,12 +37,16 @@ public ReviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
 
 @Override
 public void onBindViewHolder(@NonNull ReviewAdapter.ViewHolder viewHolder, final int i) {
-final int j;
 
-final CardView cardView = viewHolder.cardView;
-final Context context = cardView.getContext();
-
-        cardView.setOnClickListener(new View.OnClickListener() {
+       final CardView cardView = viewHolder.cardView;
+       final Context context = cardView.getContext();
+       title = (TextView)cardView.findViewById(R.id.cardviewtitle);
+       review = (TextView)cardView.findViewById(R.id.chars);
+       ratingBar = (RatingBar)cardView.findViewById(R.id.cardrating);
+       title.setText(list.get(i).getName());
+       review.setText(list.get(i).getReview());
+       ratingBar.setRating(Float.parseFloat(list.get(i).getRating()));
+       cardView.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View v) {
 
@@ -52,7 +59,6 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder(View view) {
         super(view);
-
         cardView = (CardView) view.findViewById(R.id.cardview_forreview);
 
     }
@@ -60,6 +66,6 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
     @Override
     public int getItemCount() {
         int len = list.size();
-        return 10 ;
+        return len ;
     }
 }

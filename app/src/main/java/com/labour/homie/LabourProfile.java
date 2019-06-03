@@ -41,10 +41,15 @@ Log.e("MADS",userid);
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                           Log.e("nads",dataSnapshot.getKey());
+                          // Log.e("profilereview",dataSnapshot.getKey());
                            for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-
+                               //CardReview cardReview = new CardReview(dataSnapshot1.child("name").getValue().toString(),dataSnapshot.child("review").getValue().toString(),dataSnapshot.getKey().toString(),dataSnapshot.child("rating").toString());
+                               Log.e("profile",dataSnapshot1.getKey().toString());
+                               //arrayList.add(cardReview);
                            }
+
+                ReviewAdapter reviewAdapter = new ReviewAdapter(LabourProfile.this,arrayList);
+                labourcycle.setAdapter(reviewAdapter);
 
             }
 
@@ -53,9 +58,6 @@ Log.e("MADS",userid);
 
             }
         });
-        //CardReview cardReview = new CardReview("dsfsd","sdfsd");
-        //arrayList.add(cardReview);
-        ReviewAdapter reviewAdapter = new ReviewAdapter(this,arrayList);
-        labourcycle.setAdapter(reviewAdapter);
+
     }
 }
