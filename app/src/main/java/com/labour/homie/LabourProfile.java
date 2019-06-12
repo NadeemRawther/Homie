@@ -33,7 +33,7 @@ public class LabourProfile extends AppCompatActivity {
 Log.e("MADS",userid);
         final RecyclerView labourcycle = findViewById(R.id.recyclerreview);
         labourcycle.setHasFixedSize(true);
-        DatabaseReference myRef = database.getReference("reviews/"+userid);
+        DatabaseReference myRef = database.getReference("users/reviews/"+userid);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         labourcycle.setLayoutManager(layoutManager);
@@ -41,11 +41,11 @@ Log.e("MADS",userid);
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                          // Log.e("profilereview",dataSnapshot.getKey());
+
                            for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                               //CardReview cardReview = new CardReview(dataSnapshot1.child("name").getValue().toString(),dataSnapshot.child("review").getValue().toString(),dataSnapshot.getKey().toString(),dataSnapshot.child("rating").toString());
-                               Log.e("profile",dataSnapshot1.getKey().toString());
-                               //arrayList.add(cardReview);
+                               CardReview cardReview = new CardReview(dataSnapshot1.child("name").getValue().toString(),dataSnapshot1.child("review").getValue().toString(),dataSnapshot1.getKey().toString(),dataSnapshot1.child("rating").getValue().toString());
+                               Log.e("profile",dataSnapshot1.child("name").getValue().toString());
+                               arrayList.add(cardReview);
                            }
 
                 ReviewAdapter reviewAdapter = new ReviewAdapter(LabourProfile.this,arrayList);

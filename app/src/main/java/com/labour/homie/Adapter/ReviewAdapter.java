@@ -45,7 +45,9 @@ public void onBindViewHolder(@NonNull ReviewAdapter.ViewHolder viewHolder, final
        ratingBar = (RatingBar)cardView.findViewById(R.id.cardrating);
        title.setText(list.get(i).getName());
        review.setText(list.get(i).getReview());
-       ratingBar.setRating(Float.parseFloat(list.get(i).getRating()));
+
+       ratingBar.setRating(Float.parseFloat(list.get(i).getRating().toString()));
+    ratingBar.setEnabled(false);
        cardView.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View v) {
@@ -56,11 +58,9 @@ public void onClick(View v) {
         }
 public static class ViewHolder extends RecyclerView.ViewHolder {
     CardView cardView;
-
     public ViewHolder(View view) {
         super(view);
         cardView = (CardView) view.findViewById(R.id.cardview_forreview);
-
     }
 }
     @Override

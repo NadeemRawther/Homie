@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.labour.homie.Entities.CardForLabours;
@@ -21,9 +23,10 @@ import java.util.ArrayList;
 public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder> {
 
     TextView titles,detail,requests;
-    ImageButton imgphon;
+    ImageView imgphon;
     ArrayList<CardForLabours> list;
     Context context;
+    RatingBar ratingBar;
 
     public LabourAdapter(Context context, ArrayList<CardForLabours> arrayList){
         this.list = arrayList;
@@ -47,7 +50,10 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
         titles = (TextView)cardView.findViewById(R.id.title);
         detail = (TextView)cardView.findViewById(R.id.details);
         requests = (TextView)cardView.findViewById(R.id.request);
-        imgphon = (ImageButton)cardView.findViewById(R.id.imgphone);
+        imgphon = (ImageView)cardView.findViewById(R.id.imgphone);
+        ratingBar = (RatingBar)cardView.findViewById(R.id.ratingbarforlabour);
+        ratingBar.setRating(Float.parseFloat(list.get(i).getRating().toString()));
+        ratingBar.setEnabled(false);
         titles.setText(list.get(i).getName());
         detail.setText(list.get(i).getPlace());
         requests.setText(list.get(i).getCharge());
