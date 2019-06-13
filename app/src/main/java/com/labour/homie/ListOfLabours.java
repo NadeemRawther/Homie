@@ -77,7 +77,7 @@ myRef.addListenerForSingleValueEvent(new ValueEventListener() {
            arrayList.add(cardForLabours);
 
         }
-        LabourAdapter labourAdapter = new LabourAdapter(ListOfLabours.this,arrayList);
+        LabourAdapter labourAdapter = new LabourAdapter(ListOfLabours.this,arrayList,link2);
         labourcycle.setAdapter(labourAdapter);
         Log.e("VASU",arrayList.toString());
         progressDialog.dismiss();

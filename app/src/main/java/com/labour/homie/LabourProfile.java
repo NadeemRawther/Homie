@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,17 +25,19 @@ public class LabourProfile extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     ArrayList<CardReview> arrayList = new ArrayList<>();
     private ProgressDialog progressDialog;
+    TextView title,description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_profile);
         Intent intent = getIntent();
         String userid = intent.getStringExtra("userid");
+        String category = intent.getStringExtra("category");
 Log.e("MADS",userid);
         final RecyclerView labourcycle = findViewById(R.id.recyclerreview);
         labourcycle.setHasFixedSize(true);
         DatabaseReference myRef = database.getReference("users/reviews/"+userid);
-
+        DatabaseReference myRef2 = database.getReference("users/"+category+"/"+userid);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         labourcycle.setLayoutManager(layoutManager);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -58,6 +61,24 @@ Log.e("MADS",userid);
 
             }
         });
+        title = (TextView)findViewById(R.id.title);
+        description = (TextView)findViewById(R.id.description);
+        myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+              title.setText( dataSnapshot.child("name").getValue().toString());
+              description.setText(dataSnapshot.child("details").getValue().toString());
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 }

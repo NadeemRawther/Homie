@@ -27,10 +27,12 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
     ArrayList<CardForLabours> list;
     Context context;
     RatingBar ratingBar;
+    String category;
 
-    public LabourAdapter(Context context, ArrayList<CardForLabours> arrayList){
+    public LabourAdapter(Context context, ArrayList<CardForLabours> arrayList,String link){
         this.list = arrayList;
         this.context = context;
+        this.category = link;
     }
 
 
@@ -71,6 +73,7 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
             public void onClick(View v) {
 Intent intent = new Intent(context, LabourProfile.class);
 intent.putExtra("userid",list.get(i).getUserid());
+intent.putExtra("category",category);
 
 context.startActivity(intent);
 
