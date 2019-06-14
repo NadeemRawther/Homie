@@ -1,5 +1,6 @@
 package com.labour.homie;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -59,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(user)){
                     if(dataSnapshot.child(user).child("password").getValue().equals(pass)) {
+                        sharedPreferences = getApplicationContext().getSharedPreferences("MyShared", Context.MODE_PRIVATE);
+                        editor = sharedPreferences.edit();
+                        editor.putString("username",user);
+                        editor.putString("password",pass);
+                        editor.apply();
                         Toast.makeText(MainActivity.this, "Enter as user", Toast.LENGTH_LONG).show();
                        Intent intent = new Intent(MainActivity.this,UserPage.class);
                        startActivity(intent);
@@ -83,7 +89,11 @@ public class MainActivity extends AppCompatActivity {
                     if(dataSnapshot1.hasChild(user)){
 
                         if(dataSnapshot1.child(user).child("password").getValue().equals(pass)){
-
+                            sharedPreferences = getApplicationContext().getSharedPreferences("MyShared", Context.MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
+                            editor.putString("username",user);
+                            editor.putString("password",pass);
+                            editor.apply();
                             Toast.makeText(MainActivity.this, "Enter as labour", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(MainActivity.this,UserPage.class);
                             startActivity(intent);
