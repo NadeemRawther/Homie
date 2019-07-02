@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,8 +95,12 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("username",user);
                             editor.putString("password",pass);
                             editor.apply();
+                            Log.e("MASTER",dataSnapshot1.getKey().toString());
                             Toast.makeText(MainActivity.this, "Enter as labour", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(MainActivity.this,UserPage.class);
+                            Intent intent = new Intent(MainActivity.this,LabourProfile.class);
+                            intent.putExtra("userid",user);
+                            intent.putExtra("category",dataSnapshot1.getKey());
+                            intent.putExtra("labour","labour");
                             startActivity(intent);
 
                             return;

@@ -2,14 +2,19 @@ package com.labour.homie;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,13 +32,14 @@ import com.labour.homie.Entities.CardReview;
 
 import java.util.ArrayList;
 
-public class LabourProfile extends AppCompatActivity {
+public class LabourProfile extends BaseActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     ArrayList<CardReview> arrayList = new ArrayList<>();
     private ProgressDialog progressDialog;
     TextView title,description;
     SharedPreferences sharedPreferences;
     EditText editText;
+    String labour;
     Button submitrevie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,8 @@ public class LabourProfile extends AppCompatActivity {
         Intent intent = getIntent();
         final String userid = intent.getStringExtra("userid");
         String category = intent.getStringExtra("category");
+        this.labour = intent.getStringExtra("labour");
+
 Log.e("DADS",category);
         final RecyclerView labourcycle = findViewById(R.id.recyclerreview);
         labourcycle.setHasFixedSize(true);
@@ -89,9 +97,9 @@ Log.e("DADS",category);
 
             }
         });
-editText = (EditText)findViewById(R.id.editText);
-submitrevie = (Button)findViewById(R.id.button);
-submitrevie.setOnClickListener(new View.OnClickListener() {
+             editText = (EditText)findViewById(R.id.editText);
+             submitrevie = (Button)findViewById(R.id.button);
+             submitrevie.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         if(editText.getText().toString().isEmpty()){
@@ -102,13 +110,9 @@ submitrevie.setOnClickListener(new View.OnClickListener() {
 
         }
         else{
-
-
             sharedPreferences = getApplicationContext().getSharedPreferences("MyShared", Context.MODE_PRIVATE);
-
-String username = sharedPreferences.getString("username","");
+            String username = sharedPreferences.getString("username","");
             DatabaseReference myRef3 = database.getReference("users/reviews/"+userid);
-
 
 
         }
@@ -116,4 +120,52 @@ String username = sharedPreferences.getString("username","");
 });
 
     }
+    @Override
+    public void onBackPressed() {
+        if(labour.toString().equals("labour")){
+            return;
+
+        }
+        else{
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Exit Application?");
+        alertDialogBuilder
+                .setMessage("Click yes to exit!")
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+
+
+
+                                moveTaskToBack(true);
+
+                              /*  Intent intent = new Intent(Users.this, MainActivity.class);
+                                intent.putExtra("finish", true);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);*/
+                                finish();
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                                System.exit(1);
+
+                            }
+
+                        })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+    }
+
+
 }
