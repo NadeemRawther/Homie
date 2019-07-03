@@ -18,9 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +57,7 @@ Log.e("DADS",category);
         labourcycle.setHasFixedSize(true);
         DatabaseReference myRef = database.getReference("users/reviews/"+userid);
         DatabaseReference myRef2 = database.getReference("users/labour/"+category+"/"+userid);
+        final ImageView imageView = (ImageView)findViewById(R.id.imglab);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         labourcycle.setLayoutManager(layoutManager);
@@ -66,6 +69,7 @@ Log.e("DADS",category);
                            for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                                CardReview cardReview = new CardReview(dataSnapshot1.child("name").getValue().toString(),dataSnapshot1.child("review").getValue().toString(),dataSnapshot1.getKey().toString(),dataSnapshot1.child("rating").getValue().toString());
                                Log.e("profile",dataSnapshot1.child("name").getValue().toString());
+
                                arrayList.add(cardReview);
                            }
 
@@ -87,7 +91,7 @@ Log.e("DADS",category);
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
               title.setText( dataSnapshot.child("name").getValue().toString());
               description.setText(dataSnapshot.child("details").getValue().toString());
-
+                Glide.with(LabourProfile.this).load(dataSnapshot.child("img").getValue()).into(imageView);
 
 
             }
@@ -120,26 +124,29 @@ Log.e("DADS",category);
 });
 
     }
+
+
+
+
+
+
     @Override
     public void onBackPressed() {
-        if(labour.toString().equals("labour")){
-            return;
+        if(labour.equals("labour")){
 
-        }
-        else{
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Exit Application?");
-        alertDialogBuilder
-                .setMessage("Click yes to exit!")
-                .setCancelable(false)
-                .setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Exit Application?");
+            alertDialogBuilder
+                    .setMessage("Click yes to exit!")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
 
 
 
 
-                                moveTaskToBack(true);
+                                    moveTaskToBack(true);
 
                               /*  Intent intent = new Intent(Users.this, MainActivity.class);
                                 intent.putExtra("finish", true);
@@ -147,23 +154,26 @@ Log.e("DADS",category);
                                         Intent.FLAG_ACTIVITY_CLEAR_TASK |
                                         Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);*/
-                                finish();
-                                android.os.Process.killProcess(android.os.Process.myPid());
-                                System.exit(1);
+                                    finish();
+                                    android.os.Process.killProcess(android.os.Process.myPid());
+                                    System.exit(1);
 
-                            }
+                                }
 
-                        })
+                            })
 
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                        dialog.cancel();
-                    }
-                });
+                            dialog.cancel();
+                        }
+                    });
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+        else{
+            super.onBackPressed();
     }
     }
 

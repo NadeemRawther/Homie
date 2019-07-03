@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,8 +49,75 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertBox();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
+
+    public void showAlertBox(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        View mView = View.inflate(MainActivity.this,R.layout.pageforsignup,null);
+        /*editText = (EditText)mView.findViewById(R.id.editText36);*/
+        builder.setView(mView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        final Button signupfor = (Button) mView.findViewById(R.id.signlabour);
+        final Button signupforsocial = (Button)mView.findViewById(R.id.signuser);
+
+
+        signupfor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent2 = new Intent(MainActivity.this,Signupforlabour.class);
+                startActivity(intent2);
+                alertDialog.cancel();
+            }
+        });
+        signupforsocial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(MainActivity.this,Signupforuser.class);
+                startActivity(intent3);
+alertDialog.cancel();
+            }
+        });
+    }
+
+
+
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sharedPreferences = getApplicationContext().getSharedPreferences("MyShared", Context.MODE_PRIVATE);
+        String us = sharedPreferences.getString("username","");
+        String ps = sharedPreferences.getString("password","");
+        logMethod(us,ps);
+
+    }
 
     public void logMethod(final String user, final String pass){
         if(user.isEmpty() && pass.isEmpty()){
@@ -72,6 +140,21 @@ public class MainActivity extends AppCompatActivity {
                           return;
                              }
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -117,6 +200,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
+
+
 
 
 

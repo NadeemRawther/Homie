@@ -6,10 +6,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -103,7 +105,6 @@ gridview.setAdapter(myAdapter);
 
     }
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -131,13 +132,7 @@ gridview.setAdapter(myAdapter);
     public Integer[] mThumbIds = {
             R.mipmap.achdpi,R.mipmap.c,R.mipmap.driver,R.mipmap.electrician,R.mipmap.gardener,R.mipmap.plumber,
             R.mipmap.servent,R.mipmap.treecutter
-
-
     };
-
-
-
-
     public String[] Name = {
             "AC mechanic","Carpenter","Driver","Electrician","Gardener","Plumber","Servant","Treecutter"
     };
