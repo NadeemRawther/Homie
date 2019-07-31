@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/uidsignup"
             android:layout_width="163dp"
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
@@ -33,12 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:text="Button"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintStart_toStartOf="@+id/guideline10" />
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            tools:layout_editor_absoluteY="1231dp" />
 
         <TextView
             android:id="@+id/textView3"
@@ -87,52 +87,52 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.28" />
+            app:layout_constraintGuide_percent="0.38" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.36" />
+            app:layout_constraintGuide_percent="0.45" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.43" />
+            app:layout_constraintGuide_percent="0.53" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.61" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.73" />
+            app:layout_constraintGuide_percent="0.87" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.58" />
+            app:layout_constraintGuide_percent="0.69" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.66" />
+            app:layout_constraintGuide_percent="0.78" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/placed"
             android:layout_width="164dp"
             android:layout_height="45dp"
             android:layout_marginStart="8dp"
@@ -148,7 +148,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/names"
             android:layout_width="165dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
@@ -164,7 +164,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/detaila"
             android:layout_width="166dp"
             android:layout_height="52dp"
             android:layout_marginStart="8dp"
@@ -180,7 +180,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/psword"
             android:layout_width="167dp"
             android:layout_height="53dp"
             android:layout_marginStart="8dp"
@@ -189,13 +189,13 @@
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintBottom_toTopOf="@+id/guideline30"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline19"
             app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/phne"
             android:layout_width="170dp"
             android:layout_height="42dp"
             android:layout_marginStart="8dp"
@@ -211,7 +211,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
         <EditText
-            android:id="@+id/editText8"
+            android:id="@+id/chargeperhour"
             android:layout_width="159dp"
             android:layout_height="42dp"
             android:layout_marginStart="8dp"
@@ -219,8 +219,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Charge per hour"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline19"
@@ -256,7 +256,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Password"
-            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintBottom_toTopOf="@+id/guideline30"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toTopOf="@+id/guideline12" />
@@ -327,7 +327,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/imguplobtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -336,31 +336,81 @@
             android:layout_marginBottom="8dp"
             android:text="Upload image"
             app:layout_constraintBottom_toTopOf="@+id/guideline18"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
-            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            app:layout_constraintVertical_bias="0.622" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.77" />
+            app:layout_constraintGuide_percent="0.94" />
 
         <Button
             android:id="@+id/subforlabour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Submit"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
-            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+            app:layout_constraintTop_toTopOf="@+id/guideline18"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/imgforsignup"
+            android:layout_width="88dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline18"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            app:srcCompat="@mipmap/electrician" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.27" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Category"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            app:layout_constraintTop_toTopOf="@+id/guideline30" />
+
+        <Spinner
+            android:id="@+id/categspinn"
+            android:layout_width="171dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toTopOf="@+id/guideline30" />
 
     </android.support.constraint.ConstraintLayout>
 
