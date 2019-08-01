@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "451418144456-n9h3jkpicfjndnauojrs0b96a28sdke5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.labour.homie",
+            "certificate_hash": "c66bc39e8b5e0ea4a1f858bf3d303d260b153ed3"
+          }
+        },
+        {
           "client_id": "451418144456-86qs4al68h3ppliodkg4s9hmuori2ng2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

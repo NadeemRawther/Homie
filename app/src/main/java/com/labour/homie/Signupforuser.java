@@ -2,11 +2,13 @@ package com.labour.homie;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,12 +17,23 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 public class Signupforuser extends AppCompatActivity {
@@ -28,8 +41,10 @@ public class Signupforuser extends AppCompatActivity {
     String ch,detai,imge,nam,phon,pasw,use,pla;
     Button btnuplo,subforlabours;
     ImageView imgforsignup;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef ;
+    StorageReference storageRef = storage.getReference();
     private Uri filePath;
     String link2 = "";
     Spinner categorylabour;
@@ -71,12 +86,14 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
                 String link = categorylabour.getSelectedItem().toString();
         ch = charge.getText().toString();
         detai = details.getText().toString();
-
         nam  = name.getText().toString();
         phon = phone.getText().toString();
         pasw = paswor.getText().toString();
         use = userid.getText().toString();
         pla = place.getText().toString();
+        Bitmap image=((BitmapDrawable)imgforsignup.getDrawable()).getBitmap();
+
+
         switch (link) {
             case "AC mechanic":
                 link2 = "acmechanic";
@@ -105,7 +122,7 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
 
         }
 
-        submitdatas(use, pasw,link2,nam,phon,pla,ch,detai);
+        submitdatas(use, pasw,link2,nam,phon,pla,ch,detai,image);
 
 
 
@@ -113,13 +130,9 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
 
     }
 });
-
-
-
-
     }
 
-    public void submitdatas(final String userid, String password, String link2 , String name, String  phone, String place , String charge, String details)
+    public void submitdatas(final String userid, final String password, String link2 , final String name, final String  phone, final String place , final String charge, final String details, final Bitmap img)
     {
         myRef = database.getReference("users/labour/"+link2);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,6 +140,8 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(userid)){
                     Toast.makeText(Signupforuser.this,"Userid Already Exists",Toast.LENGTH_LONG).show();
+                   uploadimg(userid,password,myRef,name,phone,place,charge,details,img);
+
 
 
                 }
@@ -139,10 +154,56 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
             }
         });
 
+    }
+
+
+
+
+    public void uploadimg(final String userid, final String password, final DatabaseReference myRef, final String name, final String phone, final String place , final String charge, final String details, Bitmap img){
+        final StorageReference imagesRef = storageRef.child("students/"+userid+".jpg");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask = imagesRef.putBytes(data);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return imagesRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.e("MASTER",downloadUri.toString());
+                    LabourModel labourModel = new LabourModel(password,name,details,place,phone,charge,downloadUri.toString());
+                    myRef.child(userid).setValue(labourModel);
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
+
 
 
 
     }
+
+
+
+
+
+
+
+
 
 
 
