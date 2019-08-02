@@ -108,7 +108,7 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
                 link2 = "electrician";
                 break;
             case "Gardener":
-                link2 = "gardener";
+                link2 = "gardner";
                 break;
             case "Plumber":
                 link2 = "plumber";
@@ -140,9 +140,14 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(userid)){
                     Toast.makeText(Signupforuser.this,"Userid Already Exists",Toast.LENGTH_LONG).show();
-                   uploadimg(userid,password,myRef,name,phone,place,charge,details,img);
 
 
+
+
+                }
+                else{
+
+                    uploadimg(userid,password,myRef,name,phone,place,charge,details,img);
 
                 }
 

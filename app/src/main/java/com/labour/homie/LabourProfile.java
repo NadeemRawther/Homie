@@ -42,6 +42,7 @@ public class LabourProfile extends BaseActivity {
     SharedPreferences sharedPreferences;
     EditText editText;
     String labour;
+
     Button submitrevie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class LabourProfile extends BaseActivity {
         final String userid = intent.getStringExtra("userid");
         String category = intent.getStringExtra("category");
         this.labour = intent.getStringExtra("labour");
+
 
 Log.e("DADS",category);
         final RecyclerView labourcycle = findViewById(R.id.recyclerreview);
@@ -115,8 +117,26 @@ Log.e("DADS",category);
         }
         else{
             sharedPreferences = getApplicationContext().getSharedPreferences("MyShared", Context.MODE_PRIVATE);
-            String username = sharedPreferences.getString("username","");
-            DatabaseReference myRef3 = database.getReference("users/reviews/"+userid);
+            final String username = sharedPreferences.getString("username","");
+            DatabaseReference myRef3 = database.getReference("users/reviews/");
+            final DatabaseReference myRef4 = database.getReference("users/reviews/"+username);
+
+            myRef3.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(username)){
+                        //String string = new String(editText.getText().toString());
+
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
 
         }
