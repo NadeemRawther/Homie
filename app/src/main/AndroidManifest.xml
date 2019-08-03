@@ -12,7 +12,10 @@
         <activity android:name=".Signupforuser"></activity>
         <activity android:name=".Signupforlabour" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".LabourProfile" />
+        <activity android:name=".LabourProfile"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".ListOfLabours" />
         <activity
             android:name=".UserPage"

@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         editor = sharedPreferences.edit();
                         editor.putString("username", user);
                         editor.putString("password", pass);
+                        editor.putString("name",dataSnapshot.child(user).child("name").getValue().toString());
                         editor.apply();
                         Toast.makeText(MainActivity.this, "Enter as user", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, UserPage.class);

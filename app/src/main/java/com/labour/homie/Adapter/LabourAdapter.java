@@ -71,11 +71,10 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-Intent intent = new Intent(context, LabourProfile.class);
-intent.putExtra("userid",list.get(i).getUserid());
-intent.putExtra("category",category);
-
-context.startActivity(intent);
+              Intent intent = new Intent(context, LabourProfile.class);
+              intent.putExtra("userid",list.get(i).getUserid());
+              intent.putExtra("category",category);
+              context.startActivity(intent);
 
             }
         });
