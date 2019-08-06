@@ -9,19 +9,30 @@
         android:roundIcon="@drawable/h"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Signupforuser"></activity>
-        <activity android:name=".Signupforlabour" />
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".LabourProfile"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".ListOfLabours" />
+        <activity android:name=".Messaging"></activity>
+        <activity
+            android:name=".Signupforuser"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Signupforlabour"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".BaseActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".LabourProfile"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ListOfLabours"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".UserPage"
             android:label="@string/title_activity_user_page"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

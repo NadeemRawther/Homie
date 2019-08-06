@@ -45,7 +45,6 @@ public class LabourProfile extends BaseActivity {
     EditText editText;
     String labour;
     RatingBar ratingBar;
-
     Button submitrevie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +135,8 @@ public class LabourProfile extends BaseActivity {
                                   editText.setVisibility(View.INVISIBLE);
                                   ratingBar.setVisibility(View.INVISIBLE);
                                   submitrevie.setVisibility(View.INVISIBLE);
-                                //calculaterating(ratingBar.getRating(),userid);
+                                  calculaterating(userid);
+                                  return;
                             }else{
                                 DatabaseReference myRef7 = database.getReference("users/reviews/"+userid);
                                 Review review = new Review(sharedPreferences.getString("name",""),editText.getText().toString(),String.valueOf(ratingBar.getRating()));
@@ -145,6 +145,8 @@ public class LabourProfile extends BaseActivity {
                                 editText.setVisibility(View.INVISIBLE);
                                 ratingBar.setVisibility(View.INVISIBLE);
                                 submitrevie.setVisibility(View.INVISIBLE);
+                                calculaterating(userid);
+                                return;
                             }
                         }
                         //String string = new String(editText.getText().toString());
@@ -157,6 +159,8 @@ public class LabourProfile extends BaseActivity {
                         editText.setVisibility(View.INVISIBLE);
                         ratingBar.setVisibility(View.INVISIBLE);
                         submitrevie.setVisibility(View.INVISIBLE);
+                        calculaterating(userid);
+                        return;
                     }
 
                 }
@@ -165,53 +169,28 @@ public class LabourProfile extends BaseActivity {
 
                 }
             });
-
-
         }
-
-
-
-
 
     }
 });
-
     }
-
-public void calculaterating(float fl,String userid){
-
-        float val ;
-
+public void calculaterating(String userid){
+    final float val;
         String get;
-
     DatabaseReference myRef7 = database.getReference("users/reviews/"+userid);
     myRef7.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-
-                for (DataSnapshot dataSnapshot2: dataSnapshot1.getChildren()){
-                    dataSnapshot2.child("rating").getValue();
-
-
-                }
-
-
-
-
-            }
+         for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()) {
+           Log.e("Blaster", dataSnapshot1.child("rating").getValue().toString());
+          // val = Float.parseFloat(dataSnapshot1.child("rating").getValue().toString());
         }
-
+        }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
         }
     });
-
-
-
-
-
 }
 
 
@@ -229,10 +208,6 @@ public void calculaterating(float fl,String userid){
                     .setPositiveButton("Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-
-
-
-
                                     moveTaskToBack(true);
 
                               /*  Intent intent = new Intent(Users.this, MainActivity.class);
