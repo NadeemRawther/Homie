@@ -52,7 +52,7 @@ public class LabourProfile extends BaseActivity {
         setContentView(R.layout.activity_labour_profile);
         Intent intent = getIntent();
         final String userid = intent.getStringExtra("userid");
-        String category = intent.getStringExtra("category");
+        final String category = intent.getStringExtra("category");
         this.labour = intent.getStringExtra("labour");
         ratingBar = (RatingBar)findViewById(R.id.ratingBar);
        Log.e("DADS",userid);
@@ -135,7 +135,7 @@ public class LabourProfile extends BaseActivity {
                                   editText.setVisibility(View.INVISIBLE);
                                   ratingBar.setVisibility(View.INVISIBLE);
                                   submitrevie.setVisibility(View.INVISIBLE);
-                                  calculaterating(userid);
+                                  calculaterating(userid,category);
                                   return;
                             }else{
                                 DatabaseReference myRef7 = database.getReference("users/reviews/"+userid);
@@ -145,7 +145,7 @@ public class LabourProfile extends BaseActivity {
                                 editText.setVisibility(View.INVISIBLE);
                                 ratingBar.setVisibility(View.INVISIBLE);
                                 submitrevie.setVisibility(View.INVISIBLE);
-                                calculaterating(userid);
+                                calculaterating(userid,category);
                                 return;
                             }
                         }
@@ -159,7 +159,7 @@ public class LabourProfile extends BaseActivity {
                         editText.setVisibility(View.INVISIBLE);
                         ratingBar.setVisibility(View.INVISIBLE);
                         submitrevie.setVisibility(View.INVISIBLE);
-                        calculaterating(userid);
+                        calculaterating(userid,category);
                         return;
                     }
 
@@ -174,17 +174,26 @@ public class LabourProfile extends BaseActivity {
     }
 });
     }
-public void calculaterating(String userid){
-    final float val;
+public void calculaterating(String userid ,String categ){
+
         String get;
+    final ArrayList<Float> arrayListForRating = new ArrayList<>();
     DatabaseReference myRef7 = database.getReference("users/reviews/"+userid);
+    final DatabaseReference myRef8 = database.getReference("users/labour/"+categ+"/"+userid);
     myRef7.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
          for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()) {
            Log.e("Blaster", dataSnapshot1.child("rating").getValue().toString());
-          // val = Float.parseFloat(dataSnapshot1.child("rating").getValue().toString());
+          arrayListForRating.add( Float.parseFloat(dataSnapshot1.child("rating").getValue().toString()));
         }
+         float val = 0;
+         for(float vel:arrayListForRating){
+             val+=vel;
+         }
+         float average = val/arrayListForRating.size();
+         myRef8.child("rating").setValue(String.valueOf(average));
+
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
