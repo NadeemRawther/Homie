@@ -9,12 +9,14 @@ public class LabourModel {
     String phone;
     String charge;
     String img;
-    public LabourModel( String password, String name, String details, String place, String phone, String charge,String img) {
+    double rating;
+    public LabourModel( String password, String name, String details, String place, String phone, String charge,String img,double rating) {
         this.password = password;
         this.name = name;
         this.details = details;
         this.place = place;
         this.phone = phone;
+        this.rating = rating;
         this.charge = charge;
         this.img = img;
     }
@@ -46,5 +48,9 @@ public class LabourModel {
 
     public String getCharge() {
         return charge;
+    }
+
+    public double getRating() {
+        return rating;
     }
 }

@@ -187,7 +187,7 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     Log.e("MASTER",downloadUri.toString());
-                    LabourModel labourModel = new LabourModel(password,name,details,place,phone,charge,downloadUri.toString());
+                    LabourModel labourModel = new LabourModel(password,name,details,place,phone,charge,downloadUri.toString(),5.0);
                     myRef.child(userid).setValue(labourModel);
                 } else {
                     // Handle failures
