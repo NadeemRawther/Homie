@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder> {
 
     TextView titles,detail,requests;
-    ImageView imgphon;
+    ImageView imgphon,imgwhats_app;
     ArrayList<CardForLabours> list;
     Context context;
     RatingBar ratingBar;
@@ -55,10 +55,21 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
         imgphon = (ImageView)cardView.findViewById(R.id.imgphone);
         ratingBar = (RatingBar)cardView.findViewById(R.id.ratingbarforlabour);
         ratingBar.setRating(Float.parseFloat(list.get(i).getRating().toString()));
+        imgwhats_app = (ImageView)cardView.findViewById(R.id.whatsicon);
+
         ratingBar.setEnabled(false);
         titles.setText(list.get(i).getName());
         detail.setText(list.get(i).getPlace());
         requests.setText(list.get(i).getCharge());
+        imgwhats_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://api.whatsapp.com/send?phone="+"+91"+list.get(i).getPhone();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
+            }
+        });
         imgphon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
