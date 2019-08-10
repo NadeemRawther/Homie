@@ -21,7 +21,6 @@ import com.labour.homie.R;
 import java.util.ArrayList;
 
 public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder> {
-
     TextView titles,detail,requests;
     ImageView imgphon,imgwhats_app;
     ArrayList<CardForLabours> list;
@@ -34,19 +33,15 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
         this.context = context;
         this.category = link;
     }
-
-
     @NonNull
     @Override
     public LabourAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         CardView view = (CardView) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_of_labours,viewGroup,false);
         return new LabourAdapter.ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull LabourAdapter.ViewHolder viewHolder, final int i) {
         final int j;
-
         final CardView cardView = viewHolder.cardView;
         final Context context = cardView.getContext();
         titles = (TextView)cardView.findViewById(R.id.title);
@@ -56,7 +51,6 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
         ratingBar = (RatingBar)cardView.findViewById(R.id.ratingbarforlabour);
         ratingBar.setRating(Float.parseFloat(list.get(i).getRating().toString()));
         imgwhats_app = (ImageView)cardView.findViewById(R.id.whatsicon);
-
         ratingBar.setEnabled(false);
         titles.setText(list.get(i).getName());
         detail.setText(list.get(i).getPlace());
@@ -78,7 +72,6 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
                 context.startActivity(intent);
             }
         });
-
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,12 +86,9 @@ public class LabourAdapter extends RecyclerView.Adapter<LabourAdapter.ViewHolder
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-
         public ViewHolder(View view) {
             super(view);
-
             cardView = (CardView) view.findViewById(R.id.cardview_foroldage);
-
         }
     }
     @Override

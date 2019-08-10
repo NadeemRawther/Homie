@@ -146,24 +146,14 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
 
                 }
                 else{
-
                     uploadimg(userid,password,myRef,name,phone,place,charge,details,img);
-
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
     }
-
-
-
-
     public void uploadimg(final String userid, final String password, final DatabaseReference myRef, final String name, final String phone, final String place , final String charge, final String details, Bitmap img){
         final StorageReference imagesRef = storageRef.child("students/"+userid+".jpg");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -177,7 +167,6 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
                 if (!task.isSuccessful()) {
                     throw task.getException();
                 }
-
                 // Continue with the task to get the download URL
                 return imagesRef.getDownloadUrl();
             }
@@ -189,27 +178,19 @@ subforlabours.setOnClickListener(new View.OnClickListener() {
                     Log.e("MASTER",downloadUri.toString());
                     LabourModel labourModel = new LabourModel(password,name,details,place,phone,charge,downloadUri.toString(),5.0);
                     myRef.child(userid).setValue(labourModel);
+                    Intent intent = new Intent(Signupforuser.this,MainActivity.class);
+                    intent.putExtra("finish", true);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                            Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 } else {
                     // Handle failures
                     // ...
                 }
             }
         });
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override

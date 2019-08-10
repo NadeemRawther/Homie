@@ -7,10 +7,6 @@
         android:orderInCategory="100"
         android:title="Logout"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/messageq"
-        android:orderInCategory="100"
-        android:title="Message"
-        app:showAsAction="never" />
+
 
 </menu>

@@ -1,11 +1,11 @@
 package com.labour.homie;
 
 public class UserCreation {
-    private String name,userid,password;
+    private String name,password;
 
-    public UserCreation(String name, String userid, String password) {
+    public UserCreation(String name, String password) {
         this.name = name;
-        this.userid = userid;
+
         this.password = password;
     }
 
@@ -13,9 +13,6 @@ public class UserCreation {
         return name;
     }
 
-    public String getUserid() {
-        return userid;
-    }
 
     public String getPassword() {
         return password;

@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.labour.homie.Entities.ImagAndText;
 import com.labour.homie.LabourList;
 import com.labour.homie.ListOfLabours;
@@ -48,7 +49,7 @@ public class ImageAdapter extends ArrayAdapter {
         TextView textView = (TextView) v.findViewById(R.id.textView);
         ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
         textView.setText(birdList.get(position).getTitle());
-        imageView.setImageResource(birdList.get(position).getImage());
+        Glide.with(context).load(birdList.get(position).getImage()).into(imageView);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

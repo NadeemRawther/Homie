@@ -1,5 +1,6 @@
 package com.labour.homie;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,13 +45,20 @@ Button submit;
                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if(dataSnapshot.hasChild(names)) {
+                       if(dataSnapshot.hasChild(userids)) {
                            Toast.makeText(Signupforlabour.this,"User Already exist",Toast.LENGTH_LONG).show();
                            return;
                        }
                        else {
-                           UserCreation userCreation = new UserCreation(names, userids, passwords);
+                           UserCreation userCreation = new UserCreation(names, passwords);
                            myRef.child(userids).setValue(userCreation);
+                           Intent intent = new Intent(Signupforlabour.this,MainActivity.class);
+                           intent.putExtra("finish", true);
+                           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                   Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                   Intent.FLAG_ACTIVITY_NEW_TASK);
+                           startActivity(intent);
+
                        }
                    }
 
